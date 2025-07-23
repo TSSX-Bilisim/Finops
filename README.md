@@ -1,14 +1,13 @@
-# InfraWatch
+# Finops
 
-This project is a monorepo structure with a simplified architecture. It includes both web and API applications in the root directory for easier development and deployment.
+This project is a simplified monorepo structure focusing on the web application for easier development and deployment.
 
 ## 🏗️ Project Structure
 
-This monorepo includes the following applications:
+This repository includes the following application:
 
 ### Applications
 - `web/`: React web application built with [Vite](https://vitejs.dev/) + [React](https://reactjs.org/)
-- `api/`: Express.js API server with TypeScript
 
 All packages and applications are written in 100% [TypeScript](https://www.typescriptlang.org/).
 
@@ -19,66 +18,58 @@ This project uses the following tools:
 - **[TypeScript](https://www.typescriptlang.org/)**: Static type checking
 - **[ESLint](https://eslint.org/)**: Code quality and standards
 - **[Prettier](https://prettier.io)**: Code formatting
-- **[PNPM](https://pnpm.io)**: Fast and disk space efficient package manager
+- **[NPM](https://www.npmjs.com/)**: Package manager
 
 ## 🚀 Getting Started
 
 ### Installing Dependencies
 
 ```bash
-# Install dependencies for the entire monorepo
-pnpm install
+# Install dependencies for the entire project
+npm install
 
-# Or install dependencies for specific applications
-cd web && pnpm install
-cd api && pnpm install
+# Or install dependencies for the web application
+cd web && npm install
 ```
 
 ### Environment Setup
 
-Before starting the development environment, you need to set up your environment variables:
+Before starting the development environment, you need to set up your environment variables for each application:
 
 ```bash
-# Copy the example environment file
+# For web application
+cd web
 cp .env.example .env
 
-# Edit the .env file with your specific configuration
-# The .env.example file contains all available environment variables with example values
+# Edit the .env file with your specific configuration for the web application
+# Each application has its own .env.example file with application-specific variables
 ```
 
-**Important**: The `.env` file contains sensitive information and should never be committed to version control. Always use `.env.example` as a template.
+**Important**: The `.env` files contain sensitive information and should never be committed to version control. Always use the respective `.env.example` files as templates for each application.
 
 ### Starting Development Environment
 
 ```bash
-# Start development server for all applications
-pnpm dev
-
-# Or start applications individually
-cd web && pnpm dev    # Start web development server
-cd api && pnpm dev    # Start API development server
+# Start the web application development server
+cd web && npm run dev
 ```
+
+**Note**: Parallel build and development scripts for multiple applications haven't been implemented yet. Each application needs to be started individually.
 
 ### Building
 
 ```bash
-# Build all applications
-pnpm build
-
-# Or build applications individually
-cd web && pnpm build    # Build web application
-cd api && pnpm build    # Build API application
+# Build the web application
+cd web && npm run build
 ```
+
+**Note**: Parallel build scripts for multiple applications haven't been implemented yet.
 
 ### Starting Production
 
 ```bash
-# Start production server after building
-pnpm start
-
-# Or start applications individually
-cd web && pnpm start    # Start web production server
-cd api && pnpm start    # Start API production server
+# Start the web application production server after building
+cd web && npm run start
 ```
 
 ## 📁 Application Structure
@@ -90,13 +81,7 @@ The web application is built with React and Vite, featuring:
 - Component-based architecture
 - Internationalization (i18n) support
 - Responsive design with Tailwind CSS
-
-### API Application (`api/`)
-The API server is built with Express.js and TypeScript, featuring:
-- RESTful API endpoints
-- TypeScript for type safety
-- Express.js framework
-- Environment configuration
+- Application-specific environment configuration
 
 ## 🔄 Development Workflow
 
@@ -213,5 +198,4 @@ To enable Copilot reviews:
 - [React Documentation](https://reactjs.org/)
 - [Vite Documentation](https://vitejs.dev/)
 - [TypeScript Documentation](https://www.typescriptlang.org/)
-- [Express.js Documentation](https://expressjs.com/)
-- [PNPM Documentation](https://pnpm.io/)
+- [NPM Documentation](https://docs.npmjs.com/)
