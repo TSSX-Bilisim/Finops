@@ -1,23 +1,14 @@
 # InfraWatch
 
-This project is a monorepo structure built using Turborepo. It's optimized for efficient development and build processes.
-
-## 📦 What is Turborepo?
-
-Turborepo is a high-performance build system designed for JavaScript and TypeScript monorepos. It accelerates the development process with intelligent caching and parallel task execution.
+This project is a monorepo structure with a simplified architecture. It includes both web and API applications in the root directory for easier development and deployment.
 
 ## 🏗️ Project Structure
 
-This monorepo includes the following packages and applications:
+This monorepo includes the following applications:
 
 ### Applications
-- `apps/web`: Web application built with [Vite](https://vitejs.dev/) + [React](https://reactjs.org/)
-- `apps/api`: Express.js API server with TypeScript
-
-### Shared Packages
-- `@repo/ui`: React component library used by all applications
-- `@repo/eslint-config`: ESLint configurations (includes eslint-config-next and eslint-config-prettier)
-- `@repo/typescript-config`: TypeScript configurations used throughout the monorepo
+- `web/`: React web application built with [Vite](https://vitejs.dev/) + [React](https://reactjs.org/)
+- `api/`: Express.js API server with TypeScript
 
 All packages and applications are written in 100% [TypeScript](https://www.typescriptlang.org/).
 
@@ -37,6 +28,10 @@ This project uses the following tools:
 ```bash
 # Install dependencies for the entire monorepo
 pnpm install
+
+# Or install dependencies for specific applications
+cd web && pnpm install
+cd api && pnpm install
 ```
 
 ### Environment Setup
@@ -59,24 +54,20 @@ cp .env.example .env
 # Start development server for all applications
 pnpm dev
 
-# Or use turbo command
-turbo dev
-
-# Run only the web application
-turbo dev --filter=web
+# Or start applications individually
+cd web && pnpm dev    # Start web development server
+cd api && pnpm dev    # Start API development server
 ```
 
 ### Building
 
 ```bash
-# Build all applications and packages
+# Build all applications
 pnpm build
 
-# Or use turbo command
-turbo build
-
-# Build only a specific package
-turbo build --filter=web
+# Or build applications individually
+cd web && pnpm build    # Build web application
+cd api && pnpm build    # Build API application
 ```
 
 ### Starting Production
@@ -85,30 +76,27 @@ turbo build --filter=web
 # Start production server after building
 pnpm start
 
-# Or use turbo command
-turbo start
+# Or start applications individually
+cd web && pnpm start    # Start web production server
+cd api && pnpm start    # Start API production server
 ```
 
-## 🔧 Turbo Commands
+## 📁 Application Structure
 
-The project supports the following core turbo commands:
+### Web Application (`web/`)
+The web application is built with React and Vite, featuring:
+- Modern React with TypeScript
+- Vite for fast development and building
+- Component-based architecture
+- Internationalization (i18n) support
+- Responsive design with Tailwind CSS
 
-- `turbo dev` - Starts development servers
-- `turbo build` - Creates production builds
-- `turbo start` - Starts production servers
-- `turbo lint` - Runs code quality checks
-- `turbo test` - Runs tests
-
-### Working with Specific Packages using Filtering
-
-```bash
-# For web application only
-turbo dev --filter=web
-turbo build --filter=web
-
-# For UI package
-turbo build --filter=@repo/ui
-```
+### API Application (`api/`)
+The API server is built with Express.js and TypeScript, featuring:
+- RESTful API endpoints
+- TypeScript for type safety
+- Express.js framework
+- Environment configuration
 
 ## 🔄 Development Workflow
 
@@ -220,31 +208,10 @@ To enable Copilot reviews:
 - Address Copilot's suggestions before requesting human review
 - Use Copilot's feedback to improve code quality
 
-## ☁️ Remote Caching
+## 📚 Additional Resources
 
-Turborepo uses [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) technology to share build caches between team members and CI/CD pipelines.
-
-### Setting up Remote Cache
-
-1. Login to your Vercel account:
-```bash
-turbo login
-```
-
-2. Link your project with Remote Cache:
-```bash
-turbo link
-```
-
-This significantly reduces build times and enables cache sharing among team members.
-
-## 📚 Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turborepo.com/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.com/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.com/docs/reference/configuration)
-- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
+- [React Documentation](https://reactjs.org/)
+- [Vite Documentation](https://vitejs.dev/)
+- [TypeScript Documentation](https://www.typescriptlang.org/)
+- [Express.js Documentation](https://expressjs.com/)
+- [PNPM Documentation](https://pnpm.io/)
