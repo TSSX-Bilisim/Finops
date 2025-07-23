@@ -25,8 +25,6 @@ This project uses the following tools:
 ### Installing Dependencies
 
 ```bash
-# Install dependencies for the entire project
-npm install
 
 # Or install dependencies for the web application
 cd web && npm install
