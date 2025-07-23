@@ -24,7 +24,7 @@ const Sidebar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const navItems = useMemo(() => [
-    { path: '/dashboard', icon: <Home size={18} />, label: t('navigation.dashboard') },
+    { path: '/', icon: <Home size={18} />, label: t('navigation.dashboard') },
     { path: '/analytics', icon: <BarChart3 size={18} />, label: t('navigation.analytics') },
     { path: '/assets', icon: <Package size={18} />, label: t('navigation.assets') },
     { path: '/team', icon: <Users size={18} />, label: t('navigation.team') }
@@ -53,11 +53,12 @@ const Sidebar = () => {
   }, [location.pathname, navItems, isExpanded]);
 
   return (
-    <aside className={`h-screen px-3 py-9 transition-all duration-300 ${isExpanded ? 'w-64' : 'w-20'}`}>
+    <aside className={`h-screen sticky top-0 px-3 py-8 transition-all duration-300 ${isExpanded ? 'w-64' : 'w-20'}`}>
       <div 
-        className={`h-full flex flex-col py-4 shadow-[0_10px_25px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_25px_rgba(0,0,0,0.2)] bg-gray-100 dark:bg-neutral-800 border border-gray-300/60 dark:border-transparent justify-between overflow-hidden transition-all duration-300 ${
+        className={`h-full flex flex-col py-4 shadow-[0_10px_25px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_25px_rgba(0,0,0,0.2)] justify-between overflow-hidden transition-all duration-300 ${
           isExpanded ? 'rounded-2xl px-4' : 'rounded-2xl items-center'
         }`}
+        style={{backgroundColor: 'var(--color-primary-50)', border: '1px solid var(--color-primary-300)'}}
       >
         {/* Logo Section */}
         <div className={`flex ${isExpanded ? 'justify-between items-center' : 'justify-center'} px-2 min-w-0`}>
@@ -65,16 +66,17 @@ const Sidebar = () => {
             <>
               <div className="flex items-center gap-3 min-w-0 flex-1">
                 <div 
-                  className="w-10 h-10 bg-gray-300/30 dark:bg-white/10 rounded-full flex items-center justify-center text-gray-800 dark:text-white font-bold text-lg border border-gray-300/40 dark:border-white/20 flex-shrink-0"
-                  style={{ backdropFilter: 'blur(10px)' }}
+                  className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg border flex-shrink-0"
+                  style={{ backdropFilter: 'blur(10px)', backgroundColor: 'var(--color-primary-100)', borderColor: 'var(--color-primary-300)', color: 'var(--color-text-primary)' }}
                 >
-                  K
+                  U
                 </div>
-                <span className="text-gray-800 dark:text-white font-semibold text-lg truncate">Kannon</span>
+                <span className="font-semibold text-lg truncate" style={{color: 'var(--color-text-primary)'}}>User</span>
               </div>
               <button
                 onClick={() => setIsExpanded(false)}
-                className="w-10 h-10 flex items-center justify-center rounded-lg text-gray-500 dark:text-gray-400 transition-all duration-200 cursor-pointer hover:text-gray-800 dark:hover:text-white hover:bg-gray-300/70 dark:hover:bg-white/20"
+                className="w-10 h-10 flex items-center justify-center rounded-lg transition-all duration-200 cursor-pointer"
+                style={{color: 'var(--color-text-primary)', border: '1px solid var(--color-primary-300)', backgroundColor: 'var(--color-primary-100)'}}
                 title={t('actions.collapseSidebar')}
               >
                 <PanelLeft size={16} />
@@ -83,16 +85,17 @@ const Sidebar = () => {
           ) : (
             <div className="relative group">
               <div 
-                className="w-10 h-10 bg-gray-300/30 dark:bg-white/10 rounded-full flex items-center justify-center text-gray-800 dark:text-white font-bold text-lg border border-gray-300/40 dark:border-white/20 cursor-pointer transition-all duration-200 group-hover:opacity-0"
-                style={{ backdropFilter: 'blur(10px)' }}
+                className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg border flex-shrink-0"
+                style={{ backdropFilter: 'blur(10px)', backgroundColor: 'var(--color-primary-100)', borderColor: 'var(--color-primary-300)', color: 'var(--color-text-primary)' }}
                 onClick={() => setIsExpanded(true)}
                 title={t('actions.expandSidebar')}
               >
-                K
+                U
               </div>
               <button
                 onClick={() => setIsExpanded(true)}
-                className="absolute inset-0 w-10 h-10 flex items-center justify-center rounded-lg text-gray-500 dark:text-gray-400 transition-all duration-200 cursor-pointer hover:text-gray-800 dark:hover:text-white hover:bg-gray-300/70 dark:hover:bg-white/20 opacity-0 group-hover:opacity-100"
+                className="absolute inset-0 w-10 h-10 flex items-center justify-center rounded-lg transition-all duration-200 cursor-pointer opacity-0 group-hover:opacity-100"
+                style={{color: 'var(--color-text-primary)', border: '1px solid var(--color-primary-300)', backgroundColor: 'var(--color-primary-100)'}}
                 title={t('actions.expandSidebar')}
               >
                 <PanelRight size={16} />
@@ -106,8 +109,8 @@ const Sidebar = () => {
           <div className={`relative w-full flex flex-col items-center min-w-0`}>
             {!isExpanded && (
               <div 
-                className="absolute right-0 w-[0.2rem] bg-amber-600 rounded-r-sm transition-all duration-[400ms] ease-out h-10 z-10 top-0"
-                style={{ transform: `translateY(${indicatorPosition}px)` }}
+                className="absolute right-0 w-[0.2rem] rounded-r-sm transition-all duration-[400ms] ease-out h-10 z-10 top-0"
+                style={{ transform: `translateY(${indicatorPosition}px)`, backgroundColor: 'var(--color-accent-600)' }}
               />
             )}
             <div className={`w-full flex flex-col gap-2 items-center min-w-0`}>
@@ -115,15 +118,34 @@ const Sidebar = () => {
                 <NavLink 
                   key={index}
                   to={item.path} 
-                  className={({ isActive }) => `
-                    flex flex-row items-center gap-2 min-w-0
-                    bg-transparent border-0 rounded-xl transition-all duration-200 cursor-pointer no-underline relative
-                    ${isExpanded ? 'w-full h-10 px-3' : 'w-10 h-10 justify-center'} 
-                    ${isActive 
-                      ? (isExpanded ? 'text-amber-600 bg-amber-600/10' : 'text-amber-600') 
-                      : 'text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-300 hover:bg-gray-300/50 dark:hover:bg-white/5'
+                  className="flex flex-row items-center gap-2 min-w-0 bg-transparent border-0 rounded-xl cursor-pointer no-underline relative"
+                  style={({ isActive }) => ({
+                    width: isExpanded ? '100%' : '40px',
+                    height: '40px',
+                    padding: isExpanded ? '0 12px' : '0',
+                    justifyContent: isExpanded ? 'flex-start' : 'center',
+                    color: isActive 
+                      ? 'var(--color-accent-600)' 
+                      : 'var(--color-text-secondary)',
+                    backgroundColor: isActive && isExpanded 
+                      ? 'var(--color-accent-50)' 
+                      : 'transparent',
+                    transition: 'all 0.2s ease',
+                  })}
+                  onMouseEnter={(e) => {
+                    const isActive = e.currentTarget.getAttribute('aria-current') === 'page';
+                    if (!isActive) {
+                      e.currentTarget.style.color = 'var(--color-text-primary)';
+                      e.currentTarget.style.backgroundColor = 'var(--color-surface)';
                     }
-                  `}
+                  }}
+                  onMouseLeave={(e) => {
+                    const isActive = e.currentTarget.getAttribute('aria-current') === 'page';
+                    if (!isActive) {
+                      e.currentTarget.style.color = 'var(--color-text-secondary)';
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                    }
+                  }}
                 >
                   {!isExpanded ? (
                     <span className="flex-shrink-0">{item.icon}</span>
@@ -146,7 +168,14 @@ const Sidebar = () => {
               {/* Theme Toggle Button */}
               <button 
                 onClick={toggleTheme}
-                className="w-full h-12 px-3 justify-start gap-3 flex items-center bg-transparent border-0 rounded-xl text-gray-600 dark:text-gray-400 transition-all duration-200 cursor-pointer hover:text-gray-800 dark:hover:text-gray-300 hover:bg-gray-300/50 dark:hover:bg-white/5 min-w-0" 
+                className="w-full h-12 px-3 justify-start gap-3 flex items-center bg-transparent border-0 rounded-xl transition-all duration-200 cursor-pointer min-w-0" 
+                style={{color: 'var(--color-text-primary)'}}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = 'var(--color-accent-600)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = 'var(--color-text-primary)';
+                }}
                 title={theme === 'dark' ? t('theme.switchToLight') : t('theme.switchToDark')}
               >
                 {theme === 'dark' ? <Moon size={20} className="flex-shrink-0" /> : <Sun size={20} className="flex-shrink-0" />}
@@ -156,7 +185,14 @@ const Sidebar = () => {
               {/* Language Toggle Button */}
               <button 
                 onClick={toggleLanguage}
-                className="w-full h-12 px-3 justify-start gap-3 flex items-center bg-transparent border-0 rounded-xl text-gray-600 dark:text-gray-400 transition-all duration-200 cursor-pointer hover:text-gray-800 dark:hover:text-gray-300 hover:bg-gray-300/50 dark:hover:bg-white/5 min-w-0" 
+                className="w-full h-12 px-3 justify-start gap-3 flex items-center bg-transparent border-0 rounded-xl transition-all duration-200 cursor-pointer min-w-0" 
+                style={{color: 'var(--color-text-primary)'}}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = 'var(--color-accent-600)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = 'var(--color-text-primary)';
+                }}
                 title={t('language.change')}
               >
                 <Globe size={20} className="flex-shrink-0" />
@@ -167,7 +203,8 @@ const Sidebar = () => {
             /* Ellipsis Button (collapsed state) */
             <button 
               onClick={() => setIsExpanded(true)}
-              className="w-10 h-10 justify-center flex items-center bg-transparent border-0 rounded-xl text-gray-600 dark:text-gray-400 transition-all duration-200 cursor-pointer hover:text-gray-800 dark:hover:text-gray-300 hover:bg-gray-300/50 dark:hover:bg-white/5" 
+              className="w-10 h-10 justify-center flex items-center bg-transparent border-0 rounded-xl transition-all duration-200 cursor-pointer" 
+              style={{color: 'var(--color-text-primary)'}}
               title={t('actions.expandSidebar')}
             >
               <MoreHorizontal size={20} />
@@ -176,7 +213,14 @@ const Sidebar = () => {
           
           {/* Logout Button */}
           <button 
-            className={`${isExpanded ? 'w-full h-12 px-3 justify-start gap-3' : 'w-10 h-10 justify-center'} flex items-center bg-transparent border-0 rounded-xl text-gray-600 dark:text-gray-400 transition-all duration-200 cursor-pointer hover:text-red-500 hover:bg-red-100/50 dark:hover:text-red-400 dark:hover:bg-red-500/10 min-w-0`} 
+            className={`${isExpanded ? 'w-full h-12 px-3 justify-start gap-3' : 'w-10 h-10 justify-center'} flex items-center bg-transparent border-0 rounded-xl transition-all duration-200 cursor-pointer min-w-0`} 
+            style={{color: 'var(--color-text-primary)'}}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = 'var(--color-accent-600)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = 'var(--color-text-primary)';
+            }}
             title={t('actions.logout')}
           >
             <LogOut size={20} className="flex-shrink-0" />
