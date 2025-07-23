@@ -2,12 +2,12 @@
   "name": "infrawatch",
   "private": true,
   "scripts": {
-    "build": "cd web && pnpm build && cd ../api && pnpm build",
-    "dev": "concurrently \"cd web && pnpm dev\" \"cd api && pnpm dev\"",
-    "start": "concurrently \"cd web && pnpm start\" \"cd api && pnpm start\"",
-    "lint": "cd web && pnpm lint && cd ../api && pnpm lint",
+    "build": "cd web && npm run build && cd ../api && npm run build",
+    "dev": "concurrently \"cd web && npm run dev\" \"cd api && npm run dev\"",
+    "start": "concurrently \"cd web && npm run start\" \"cd api && npm run start\"",
+    "lint": "cd web && npm run lint && cd ../api && npm run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "check-types": "cd web && pnpm check-types && cd ../api && pnpm check-types"
+    "check-types": "cd web && npm run check-types && cd ../api && npm run check-types"
   },
   "devDependencies": {
     "@types/node": "^24.1.0",
@@ -16,7 +16,7 @@
     "prettier": "^3.6.2",
     "typescript": "5.8.3"
   },
-  "packageManager": "pnpm@9.0.0",
+  "packageManager": "npm@10.0.0",
   "engines": {
     "node": ">=18"
   }
