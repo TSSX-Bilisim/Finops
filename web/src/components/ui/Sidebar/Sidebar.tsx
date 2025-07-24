@@ -53,7 +53,7 @@ const Sidebar = () => {
   }, [location.pathname, navItems, isExpanded]);
 
   return (
-    <aside className={`h-screen sticky top-0 px-3 py-8 transition-all duration-300 ${isExpanded ? 'w-64' : 'w-20'}`}>
+    <aside className={`h-screen sticky top-0 px-2 py-8 transition-all duration-300 ${isExpanded ? 'w-64' : 'w-20'}`}>
       <div 
         className={`h-full flex flex-col py-4 shadow-[0_10px_25px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_25px_rgba(0,0,0,0.2)] justify-between overflow-hidden transition-all duration-300 ${
           isExpanded ? 'rounded-2xl px-4' : 'rounded-2xl items-center'
