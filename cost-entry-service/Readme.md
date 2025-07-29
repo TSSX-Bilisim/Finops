@@ -1,0 +1,1 @@
+Assetlerin maliyetlerini databaseye yazdıran servis.
