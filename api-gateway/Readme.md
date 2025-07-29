@@ -1,0 +1,1 @@
+Cost entry, report ve user servislerini korumak için proxy işlevi görecek olan servis. Limiterlarda kullanılacak.

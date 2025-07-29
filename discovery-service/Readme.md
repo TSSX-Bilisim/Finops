@@ -1,0 +1,1 @@
+Assetlere uygun keşif fonksiyonları ile verileri databaseye yazdıran servis.

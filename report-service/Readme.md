@@ -1,0 +1,1 @@
+Databaseden tüm ihtiyaçları costları ile birlikte çeken ana ekrana yazdıran servis. Gerekirse içeride maliyet hesaplamalı fonksiyonlarda olabilir.
