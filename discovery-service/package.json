@@ -6,8 +6,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/server.js",
-    "dev": "ts-node src/server.ts",
-    "dev:watch": "nodemon --exec ts-node src/server.ts",
+    "dev": "nodemon --exec ts-node --files src/server.ts",
     "test": "jest",
     "lint": "eslint src/**/*.ts",
     "clean": "rm -rf dist"
@@ -33,7 +32,6 @@
     "@types/cors": "^2.8.17",
     "@types/compression": "^1.7.5",
     "typescript": "^5.3.2",
-    "ts-node": "^10.9.1",
     "nodemon": "^3.0.2",
     "@typescript-eslint/eslint-plugin": "^6.13.1",
     "@typescript-eslint/parser": "^6.13.1",
