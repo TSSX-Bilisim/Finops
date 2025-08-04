@@ -23198,3 +23198,9 @@
 {"level":"info","message":"Phase 3: Fetching details for 0 nodes of type DiscoveredOSNamespace","service":"discovery-service","timestamp":"2025-07-31T08:41:39.227Z"}
 {"detailsFetched":0,"errorCount":0,"level":"info","message":"Node type completed: DiscoveredOSNamespace","nodeIds":0,"service":"discovery-service","syncedCount":0,"timestamp":"2025-07-31T08:41:39.227Z"}
 {"level":"info","message":"Comprehensive node data synchronization completed","processingTime":176735,"service":"discovery-service","timestamp":"2025-07-31T08:41:39.228Z","totalDetails":3865,"totalErrors":0,"totalNodeIds":3865,"totalNodeTypes":233,"totalSynced":3865}
+{"level":"warn","message":"HTTPS agent configured to accept self-signed certificates for development","service":"discovery-service","timestamp":"2025-08-04T07:45:50.791Z"}
+{"level":"info","message":"Server is running on port 8001","service":"discovery-service","timestamp":"2025-08-04T07:45:50.834Z"}
+{"baseURL":"https://192.168.60.168/api/v1.14","level":"info","message":"BMC Discovery API Request","method":"GET","service":"discovery-service","timestamp":"2025-08-04T07:45:50.835Z","url":"/vault"}
+{"dataLength":59,"level":"info","message":"BMC Discovery API Response","service":"discovery-service","status":200,"timestamp":"2025-08-04T07:45:50.886Z","url":"/vault"}
+{"level":"info","message":"BMC Discovery health check passed","service":"discovery-service","timestamp":"2025-08-04T07:45:50.887Z"}
+{"level":"info","message":"BMC Discovery connection successful","service":"discovery-service","timestamp":"2025-08-04T07:45:50.887Z"}

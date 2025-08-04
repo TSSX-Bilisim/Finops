@@ -15,7 +15,7 @@ const {
   NODE_ENV,
 } = process.env;
 
-export const config = {
+export default {
   PORT,
   DB_HOST,
   DB_PORT,
