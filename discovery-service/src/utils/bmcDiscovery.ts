@@ -1,12 +1,12 @@
 import axios, { AxiosInstance } from "axios";
 import https from "https";
-import { config } from "../config/config";
+import config from "../config/config";
 import { logger } from "./logger";
 
 interface BMCDiscoveryConfig {
   baseURL: string;
   apiToken: string;
-  timeout?: number; 
+  timeout?: number;
   retryAttempts?: number;
 }
 
@@ -26,11 +26,13 @@ class BMCDiscoveryClient {
 
     // Create HTTPS agent that accepts self-signed certificates in development
     const httpsAgent = new https.Agent({
-      rejectUnauthorized: process.env.NODE_ENV === 'production', // Only reject in production
+      rejectUnauthorized: process.env.NODE_ENV === "production", // Only reject in production
     });
 
-    if (process.env.NODE_ENV !== 'production') {
-      logger.warn("HTTPS agent configured to accept self-signed certificates for development");
+    if (process.env.NODE_ENV !== "production") {
+      logger.warn(
+        "HTTPS agent configured to accept self-signed certificates for development"
+      );
     }
 
     this.client = axios.create({
@@ -38,8 +40,8 @@ class BMCDiscoveryClient {
       timeout: configParams.timeout || 60000,
       httpsAgent: httpsAgent, // Use the custom HTTPS agent
       headers: {
-        Authorization: configParams.apiToken.startsWith('Bearer ') 
-          ? configParams.apiToken 
+        Authorization: configParams.apiToken.startsWith("Bearer ")
+          ? configParams.apiToken
           : `Bearer ${configParams.apiToken}`,
         "Content-Type": "application/json",
         Accept: "application/json",
@@ -136,30 +138,39 @@ class BMCDiscoveryClient {
 
   async getNodeIds(nodeName: string): Promise<string[]> {
     const response = await this.client.get(`/data/kinds/${nodeName}`);
-    
+
     logger.info("BMC API Raw Response Debug", {
       nodeName,
       isArray: Array.isArray(response.data),
       dataLength: response.data?.length,
-      firstElementKeys: response.data?.[0] ? Object.keys(response.data[0]) : null,
+      firstElementKeys: response.data?.[0]
+        ? Object.keys(response.data[0])
+        : null,
       firstElementKind: response.data?.[0]?.kind,
       firstElementCount: response.data?.[0]?.count,
       hasResults: !!response.data?.[0]?.results,
-      resultsLength: response.data?.[0]?.results?.length
+      resultsLength: response.data?.[0]?.results?.length,
     });
-    
+
     // BMC Discovery API returns data in format: [{ results: [[id, name, ...], ...] }]
     // Extract node IDs from the results array (first element of each result)
     const nodeIds: string[] = [];
-    if (response.data && Array.isArray(response.data) && response.data[0]?.results && Array.isArray(response.data[0].results)) {
-      nodeIds.push(...response.data[0].results.map((result: any[]) => result[0]));
+    if (
+      response.data &&
+      Array.isArray(response.data) &&
+      response.data[0]?.results &&
+      Array.isArray(response.data[0].results)
+    ) {
+      nodeIds.push(
+        ...response.data[0].results.map((result: any[]) => result[0])
+      );
     }
-    
+
     logger.info("Node IDs fetched", {
       nodeName,
       nodeIds: nodeIds.length,
-      apiResponseFormat: response.data?.[0]?.kind || 'unknown',
-      extractedIds: nodeIds.slice(0, 3) // Show first 3 IDs for debugging
+      apiResponseFormat: response.data?.[0]?.kind || "unknown",
+      extractedIds: nodeIds.slice(0, 3), // Show first 3 IDs for debugging
     });
     return nodeIds;
   }
@@ -169,8 +180,15 @@ class BMCDiscoveryClient {
     try {
       // BMC Discovery API test endpoint'i
       const response = await this.client.get("/vault");
-      logger.info("BMC Discovery health check passed");
-      return response.status === 200;
+      if (response.status === 200) {
+        logger.info("BMC Discovery health check passed");
+        return true;
+      } else {
+        logger.error("BMC Discovery health check failed", {
+          error: response.status,
+        });
+        return false;
+      }
     } catch (error) {
       logger.error("BMC Discovery health check failed", { error });
       return false;

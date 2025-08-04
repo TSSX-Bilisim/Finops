@@ -18,18 +18,26 @@ app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use((req, res, next) => {
+  logger.info(`Received ${req.method} request to ${req.url}`);
+  if (Object.keys(req.body).length > 0) {
+    logger.info(`Request body: ${JSON.stringify(req.body)}`);
+  }
+  next();
+});
+
 app.use("/discovery", discoveryRoutes);
 
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => { 
-    bmcDiscoveryClient.healthCheck().then((isHealthy) => {
-        if (isHealthy) {
-            logger.info("BMC Discovery connection successful");
-        } else {
-            logger.warn("BMC Discovery connection failed");
-        }
-    });
-    logger.info(`Server is running on port ${PORT}`);
+app.listen(PORT, () => {
+  bmcDiscoveryClient.healthCheck().then((isHealthy) => {
+    if (isHealthy) {
+      logger.info("BMC Discovery connection successful");
+    } else {
+      logger.warn("BMC Discovery connection failed");
+    }
+  });
+  logger.info(`Server is running on port ${PORT}`);
 });

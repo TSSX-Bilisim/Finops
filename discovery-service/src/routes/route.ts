@@ -2,7 +2,7 @@ import { Router } from "express";
 import {
   createNodeTypeTables,
   syncAllNodeData,
-  getDiscoveryStats
+  getDiscoveryStats,
 } from "../controllers/discoveryController";
 
 const router = Router();
@@ -17,4 +17,3 @@ router.post("/create-tables", createNodeTypeTables);
 router.post("/sync-all", syncAllNodeData);
 
 export default router;
-

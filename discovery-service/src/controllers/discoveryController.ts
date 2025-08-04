@@ -257,7 +257,7 @@ function extractNodeDataByCategory(nodeDetails: any, category: string): Record<s
   
   // Kategori bazlı özel alanları map et
   switch (category) {
-    case 'Hosts & Host Containers':
+    case 'Hosts & Host Containers': {
       // BMC Discovery API data is in nodeDetails.state object
       const state = nodeDetails.state || {};
       data.hostname = state.hostname || state.name || nodeDetails.name;
@@ -272,6 +272,7 @@ function extractNodeDataByCategory(nodeDetails: any, category: string): Record<s
       data.last_boot_time = state.boot_time || nodeDetails.lastBootTime || nodeDetails.last_boot_time;
       data.host_type = state.host_type || state.type || nodeDetails.hostType || nodeDetails.kind;
       break;
+    }
 
     case 'Network & Printers':
       data.device_name = nodeDetails.deviceName || nodeDetails.device_name || nodeDetails.name;
